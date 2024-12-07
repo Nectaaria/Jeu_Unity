@@ -1879,7 +1879,7 @@ GameObject:
   - component: {fileID: 981636899}
   - component: {fileID: 981636900}
   m_Layer: 0
-  m_Name: TimeControl
+  m_Name: TimeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1920,9 +1920,7 @@ MonoBehaviour:
   timerMinutesDisplay: {fileID: 723113173}
   timerHoursDisplay: {fileID: 463100743}
   dayCounterDisplay: {fileID: 1699812727}
-  timer: 0
-  day: 1
-  hour: 0
+  timeArray: 000000000000000000000000
 --- !u!1 &1004656543
 GameObject:
   m_ObjectHideFlags: 0

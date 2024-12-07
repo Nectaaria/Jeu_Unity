@@ -19,8 +19,8 @@ public class prosperityGauje : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        prosperity = timeManager.timer;
-        prosperityGauge.value = prosperity/60;
-        Debug.Log(prosperity);
+        prosperity = timeManager.timeArray[2];
+        prosperityGauge.value = prosperity / 60;
+        //Debug.Log(prosperity);
     }
 }

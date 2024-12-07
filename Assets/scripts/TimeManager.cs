@@ -7,6 +7,8 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
+    public static TimeManager instance { get; private set; }
+
     [SerializeField, Tooltip("Durée de la journée en minutes")]
     private float dayDuration = 4f;
 
@@ -18,14 +20,29 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerMinutesDisplay;
     [SerializeField] private TextMeshProUGUI timerHoursDisplay;
     [SerializeField] private TextMeshProUGUI dayCounterDisplay;
-    
-    public float timer = 0f;
-    public int day = 1;
-    public int hour = 0;
-    
+
+    public int[] timeArray = new int[3]; //array avec Jour/heure/minute du temps ingame
+    private float timeElapsed;
+
+    private float minute = 0;
+    private int hour = 0; // uniquement utilisées pour le display
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
-        dayCounterDisplay.text = "Day : " + day.ToString();
+        timeArray[0] = 1;
+        timeArray[1] = hour
+            ;
+        timeArray[2] = (int)minute;
+
+        dayCounterDisplay.text = "Day : " + timeArray[0].ToString();
         toggleSpeed_Pause.onValueChanged.AddListener(delegate
         {
             if (toggleSpeed_Pause.isOn)
@@ -59,27 +76,31 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime * 1440 / (dayDuration * 60);
-        //Debug.Log(timer);
+        timeElapsed += Time.deltaTime * 1440 / (dayDuration * 60);
+        timeArray[2] = (int)timeElapsed;
+        minute += Time.deltaTime * 1440 / (dayDuration * 60);
+        Debug.Log("minutes = " + timeArray[2]);
+        Debug.Log("heures = " + timeArray[1]);
 
-        if (Mathf.Round(timer) < 10)
+        if (minute < 9.5f)
         {
-            timerMinutesDisplay.text = "0" + Mathf.Round(timer).ToString();
+            timerMinutesDisplay.text = "0" + Mathf.Round(minute).ToString();
         }
         else
         {
-            timerMinutesDisplay.text = Mathf.Round(timer).ToString();
+            timerMinutesDisplay.text = Mathf.Round(minute).ToString();
         }
 
-        if (Mathf.Round(timer) >= 60f)
+        if (minute >= 59.5f)
         {
-            timer = 0f;
+            minute = 0;
             hour += 1;
+            timeArray[1] += 1;
             if (hour == 24)
             {
                 hour = 0;
-                day += 1;
-                dayCounterDisplay.text = "Day : " + day.ToString();
+                timeArray[0] += 1;
+                dayCounterDisplay.text = "Day : " + timeArray[0].ToString();
             }
             if (hour < 10)
             {
@@ -88,7 +109,6 @@ public class TimeManager : MonoBehaviour
             else
             {
                 timerHoursDisplay.text = hour.ToString();
-
             }
         }
     }
