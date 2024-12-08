@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Fox : MonoBehaviour
 {
-    [SerializeField] float liveTime;
-    private float bornTime;
+    [SerializeField] int daysToLive;
+    private float bornDay;
     public enum Task { wandering, working, sleeping };
     public Task state = Task.wandering;
     [SerializeField] float wanderRange = 5f;
@@ -14,37 +14,35 @@ public class Fox : MonoBehaviour
     private NavMeshAgent agent;
     [SerializeField] GameObject workplace;
 
-    [SerializeField] float workDuration;
-    [SerializeField] float sleepDuration;
+    [SerializeField] float workDuration = 480;
+    [SerializeField] float sleepDuration = 600;
 
-    private float sadTimeOrigin;
+    private float sadTimeOrigin = -1;
+    [SerializeField] float sadDelay = 180;
     public bool isSad = false;
 
-    Coroutine coroutine=null;
+    Coroutine coroutine = null;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        liveTime = Random.Range(10,15);
-        //bornTime = horloge.time;
+        daysToLive = Random.Range(10,15);
+        bornDay = TimeManager.instance.timeArray[0];
     }
 
     private void Update()
     {
-        /*
-        //if he is old enough, he dies
-        private float currentTime = horloge.time;
-        if(bornTime + currentTime > liveTime)
+        Debug.Log(isSad);
+        //Death by aging
+        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
         {
-            GameObject.Destroy();
+            Destroy(gameObject);
         }
 
-        //if he didn't sleep for too long, he's sad
-        if(horloge.timer > sadTimeOrigin + sadTimeToTrigger)
+        if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
         {
             isSad = true;
         }
-        */
 
         //if he doesn't have a job
         if (workplace == null)
@@ -65,7 +63,7 @@ public class Fox : MonoBehaviour
 
             case Task.sleeping:
                 //chercher maison pour dormir et si arrive pas, Wander();
-                //si arrive, isSad = false
+                //si arrive, isSad = false et sadTimeOrigin = -1;
                 break;
         }
     }
@@ -107,9 +105,9 @@ public class Fox : MonoBehaviour
     //Change the state after a certain amount of time
     IEnumerator stateAterTime(float duration, Task state)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * TimeManager.instance.gameMinToRealSec);
         if (state == Task.sleeping)
-            sadTimeOrigin = Time.time;
+            sadTimeOrigin = TimeManager.instance.timeArray[2];
         this.state = state;
     }
 }

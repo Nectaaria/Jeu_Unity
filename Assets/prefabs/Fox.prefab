@@ -143,10 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411292478f55fd64f885492f8e5af985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 10
+  daysToLive: 0
   state: 1
   wanderRange: 10
   workplace: {fileID: 0}
-  workDuration: 5
-  sleepDuration: 0
+  workDuration: 100
+  sleepDuration: 600
+  sadDelay: 180
   isSad: 0
