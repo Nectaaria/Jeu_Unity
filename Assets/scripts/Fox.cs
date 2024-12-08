@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Fox : MonoBehaviour
 {
-    private int age = 0;
-    public bool isTired = false;
+    [SerializeField] int daysToLive;
+    private float bornDay;
     public enum Task { wandering, working, sleeping };
     public Task state = Task.wandering;
     [SerializeField] float wanderRange = 5f;
@@ -14,66 +14,86 @@ public class Fox : MonoBehaviour
     private NavMeshAgent agent;
     [SerializeField] GameObject workplace;
 
-    [SerializeField] float workDuration;
-    [SerializeField] float sleepDuration;
-    private float depressionTimer;
+    [SerializeField] float workDuration = 480;
+    [SerializeField] float sleepDuration = 600;
 
-    Coroutine coroutine=null;
+    private float sadTimeOrigin = -1;
+    [SerializeField] float sadDelay = 180;
+    public bool isSad = false;
+
+    Coroutine coroutine = null;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        daysToLive = Random.Range(10,15);
+        bornDay = TimeManager.instance.timeArray[0];
     }
 
     private void Update()
     {
-        switch(state)
+        Debug.Log(isSad);
+        //Death by aging
+        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
+        {
+            Destroy(gameObject);
+        }
+
+        if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
+        {
+            isSad = true;
+        }
+
+        //if he doesn't have a job
+        if (workplace == null)
+        {
+            state = Task.wandering;
+        }
+
+        switch (state)
         {
             case Task.wandering:
                 Wander();
                 break;
 
             case Task.working:
-                Work();
+                //Work and become tired at the end
+                InteractWith(workplace, workDuration, Task.sleeping);
+                break;
+
+            case Task.sleeping:
+                //chercher maison pour dormir et si arrive pas, Wander();
+                //si arrive, isSad = false et sadTimeOrigin = -1;
                 break;
         }
     }
 
+    // make the npc wander to a random point in the navMesh surface
     private void Wander()
     {
-        if (coroutine != null)
-            return;
-
-        if (isTired)
-        {
-            //parcours toutes les maisons en quête d'une maison vide pour dodo et si trouve:
-            /*coroutine = StartCoroutine(stateAterTime(sleepDuration, Task.wandering));
-            coroutine = null;*/
-        }
-        else
-        {
-            if (agent.remainingDistance < 1)
-                agent.SetDestination(RandomWanderPosition());
-        }
+        if (agent.remainingDistance < 1)
+            agent.SetDestination(RandomWanderPosition());
     }
 
-    private void Work()
+    // interact with a building (for sleeping and working) and change the state at the end
+    private void InteractWith(GameObject target, float duration, Task nextState)
     {
-        if (Vector3.Distance(transform.position, workplace.transform.position) < 1)
+        if (Vector3.Distance(transform.position, target.transform.position) < 1)
         {
-
-            //workplace.GetComponent<script>().Harvest();
+            /*if (target.tag == "workplace")
+                workplace.GetComponent<script>().Harvest();*/
             if (coroutine != null)
                 return;
-            coroutine =  StartCoroutine( stateAterTime(workDuration, Task.wandering));
+            coroutine =  StartCoroutine( stateAterTime(duration, nextState));
             coroutine = null;
         }
         else
         {
-            agent.SetDestination(workplace.transform.position);
+            agent.SetDestination(target.transform.position);
         }
     }
 
+    // return a random position in a certain radius in the navMesh surface
     private Vector3 RandomWanderPosition()
     {
         Vector3 randomPos = (Random.insideUnitSphere * wanderRange) + transform.position;
@@ -82,14 +102,12 @@ public class Fox : MonoBehaviour
         return posHit.position;
     }
 
-    //remplacer par timer de horloge
+    //Change the state after a certain amount of time
     IEnumerator stateAterTime(float duration, Task state)
     {
-        yield return new WaitForSeconds(duration);
-
-        if(this.state == Task.working)
-            isTired = true;
-
+        yield return new WaitForSeconds(duration * TimeManager.instance.gameMinToRealSec);
+        if (state == Task.sleeping)
+            sadTimeOrigin = TimeManager.instance.timeArray[2];
         this.state = state;
     }
 }
