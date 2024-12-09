@@ -13,17 +13,34 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject optionPanel;
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject changeJobButtonsLayout;
+    [SerializeField] private GameObject buildButtonsLayout;
+
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button mainMenuQuitButton;
 
     [SerializeField] private Button resumeButton;
-    [SerializeField] private Button optionsButton;
-    [SerializeField] private Button backButton;
+    [SerializeField] private Button pauseMenuQuitButton;
+    [SerializeField] private Button optionButton;
+    [SerializeField] private Button optionMenuBackButton;
 
-    private float timeScale;
+    [SerializeField] private Button changeJobButton;
+
+    [SerializeField] private Button replayButton;
+
+    private float timeScale = 1f;
+
     void Start()
     {
-        resumeButton.onClick.AddListener(() =>PauseGame(isGamePaused));
-        optionsButton.onClick.AddListener(OptionMenu);
-        backButton.onClick.AddListener(OptionMenu);
+        resumeButton.onClick.AddListener(() => PauseGame(isGamePaused));
+        pauseMenuQuitButton.onClick.AddListener(BackToMainMenu);
+        mainMenuQuitButton.onClick.AddListener(BackToMainMenu);
+        playButton.onClick.AddListener(PlayGame);
+        changeJobButton.onClick.AddListener(ChangeJob);
+        optionButton.onClick.AddListener(OptionMenu);
+        optionMenuBackButton.onClick.AddListener(OptionMenu);
+        replayButton.onClick.AddListener(Replay);
     }
 
     void Update()
@@ -34,7 +51,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void PauseGame(bool isPaused)
+    private void PauseGame(bool isPaused)
     {
         if (!isGamePaused)
         {
@@ -54,13 +71,34 @@ public class UIManager : MonoBehaviour
             isGamePaused = false;
         }
     }
-    public void OptionMenu()
+
+    private void BackToMainMenu()
     {
-        pausePanel.SetActive(!pausePanel.activeInHierarchy);
-        optionPanel.SetActive(!optionPanel.activeInHierarchy);
+        mainMenuPanel.SetActive(true);
+        optionPanel.SetActive(false);
+        isGamePaused = true;
+        Time.timeScale = 0f;
     }
-    public void Quit()
+    private void ChangeJob()
     {
-        
+        changeJobButtonsLayout.SetActive(!changeJobButtonsLayout.activeInHierarchy);
+        buildButtonsLayout.SetActive(!buildButtonsLayout.activeInHierarchy);
+    }
+    private void PlayGame()
+    {
+        Time.timeScale = timeScale;
+        isGamePaused = false;
+        mainMenuPanel.SetActive(false);
+        pauseMenu.enabled = false;
+        uiCanvas.enabled = true;
+    }
+    private void OptionMenu()
+    {
+        optionPanel.SetActive(!optionPanel.activeInHierarchy);
+        pausePanel.SetActive(!pausePanel.activeInHierarchy);
+    }
+    private void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
