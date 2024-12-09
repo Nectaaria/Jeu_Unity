@@ -68,21 +68,17 @@ public class Game : MonoBehaviour
             nbFoxes -= nbFoxes;
         }*/
         //if the fox is too old, it dies
-        for (int i = 0; i < nbFoxes; i++)
+        for (int i = nbFoxes - 1; i >= 0; i--)
         {
             Debug.Log("i "+i);
             var currentFox = PopulationManager.instance.foxes[i].GetComponent<Fox>();
             if (TimeManager.instance.timeArray[0] > currentFox.bornDay + currentFox.daysToLive)
             {
-                Destroy(PopulationManager.instance.foxes[i]);
-                foxesToDie.Add(i);
+                PopulationManager.instance.foxes.RemoveAt(i);
+                Destroy(currentFox.gameObject); 
+                //foxesToDie.Add(i);
             }
         }
-        for (int i = 0; i < foxesToDie.Count-1; i++)
-        {
-            PopulationManager.instance.foxes.RemoveAt(foxesToDie[i]);
-        }
-        foxesToDie.Clear();
     }
 
     void Eating()
