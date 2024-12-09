@@ -4,12 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Workplace
+  - Left
+  - Right
+  - Footer
+  - Header
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
