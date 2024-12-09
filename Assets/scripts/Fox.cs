@@ -23,7 +23,7 @@ public class Fox : MonoBehaviour
 
     Coroutine coroutine = null;
 
-    private void Awake()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         daysToLive = Random.Range(10,15);
@@ -32,13 +32,7 @@ public class Fox : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isSad);
-        //Death by aging
-        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
-        {
-            Destroy(gameObject);
-        }
-
+        //depression
         if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
         {
             isSad = true;
