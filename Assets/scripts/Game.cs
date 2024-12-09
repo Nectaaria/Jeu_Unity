@@ -7,7 +7,8 @@ public class Game : MonoBehaviour
     [SerializeField] GaugeManager gaugeManager;
     [SerializeField] PopulationManager populationManager;
     //Foxes
-    [SerializeField] private int nbFoxes;
+    public int nbFoxes;
+    private List<int> foxesToDie;
     
     //World
     private int foodQuantity;
@@ -57,7 +58,7 @@ public class Game : MonoBehaviour
     void KillFox()
     {
         //if the fox hasn't eaten today, it dies
-        if (hasEaten == "Partially")
+        /*if (hasEaten == "Partially")
         {
             nbFoxes -= nbFoxesNotEating;
             //choose randomly which foxes die
@@ -65,17 +66,23 @@ public class Game : MonoBehaviour
         if (hasEaten == "No")
         {
             nbFoxes -= nbFoxes;
-        }
+        }*/
         //if the fox is too old, it dies
-        for (int i = nbFoxes; i <= 0; i--)
+        for (int i = 0; i < nbFoxes; i++)
         {
+            Debug.Log("i "+i);
             var currentFox = PopulationManager.instance.foxes[i].GetComponent<Fox>();
             if (TimeManager.instance.timeArray[0] > currentFox.bornDay + currentFox.daysToLive)
             {
-                Destroy(gameObject);
-                PopulationManager.instance.foxes.RemoveAt(i);
+                Destroy(PopulationManager.instance.foxes[i]);
+                foxesToDie.Add(i);
             }
         }
+        for (int i = 0; i < foxesToDie.Count-1; i++)
+        {
+            PopulationManager.instance.foxes.RemoveAt(foxesToDie[i]);
+        }
+        foxesToDie.Clear();
     }
 
     void Eating()

@@ -26,7 +26,7 @@ public class Fox : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        daysToLive = Random.Range(10,15);
+        daysToLive = Random.Range(1,2);
         bornDay = TimeManager.instance.timeArray[0];
     }
 
