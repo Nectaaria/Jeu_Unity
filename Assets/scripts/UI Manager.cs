@@ -27,6 +27,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Button changeJobButton;
 
+    /*[SerializeField] private Button learnFarmerButton;
+    [SerializeField] private Button learnLumberjackButton;
+    [SerializeField] private Button learnMinerButton;
+    [SerializeField] private Button learnBuilderButton;*/
+    //à faire dans onClick avec le script des batiments
+
     [SerializeField] private Button replayButton;
 
     private float timeScale = 1f;
@@ -35,7 +41,7 @@ public class UIManager : MonoBehaviour
     {
         resumeButton.onClick.AddListener(() => PauseGame(isGamePaused));
         pauseMenuQuitButton.onClick.AddListener(BackToMainMenu);
-        mainMenuQuitButton.onClick.AddListener(BackToMainMenu);
+        mainMenuQuitButton.onClick.AddListener(QuitGame);
         playButton.onClick.AddListener(PlayGame);
         changeJobButton.onClick.AddListener(ChangeJob);
         optionButton.onClick.AddListener(OptionMenu);
@@ -71,7 +77,10 @@ public class UIManager : MonoBehaviour
             isGamePaused = false;
         }
     }
-
+    private void QuitGame()
+    {
+        Application.Quit();
+    }
     private void BackToMainMenu()
     {
         mainMenuPanel.SetActive(true);
@@ -82,7 +91,6 @@ public class UIManager : MonoBehaviour
     private void ChangeJob()
     {
         changeJobButtonsLayout.SetActive(!changeJobButtonsLayout.activeInHierarchy);
-        buildButtonsLayout.SetActive(!buildButtonsLayout.activeInHierarchy);
     }
     private void PlayGame()
     {
