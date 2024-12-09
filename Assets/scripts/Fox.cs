@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Fox : MonoBehaviour
 {
-    [SerializeField] int daysToLive;
-    private float bornDay;
+    public int daysToLive;
+    public float bornDay;
     public enum Task { wandering, working, sleeping };
     public Task state = Task.wandering;
     [SerializeField] float wanderRange = 5f;
@@ -23,22 +23,16 @@ public class Fox : MonoBehaviour
 
     Coroutine coroutine = null;
 
-    private void Awake()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        daysToLive = Random.Range(10,15);
+        daysToLive = Random.Range(1,2);
         bornDay = TimeManager.instance.timeArray[0];
     }
 
     private void Update()
     {
-        Debug.Log(isSad);
-        //Death by aging
-        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
-        {
-            Destroy(gameObject);
-        }
-
+        //depression
         if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
         {
             isSad = true;
