@@ -5,8 +5,9 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] GaugeManager gaugeManager;
+    [SerializeField] PopulationManager populationManager;
     //Foxes
-    private int nbFoxes = 0;
+    [SerializeField] private int nbFoxes = populationManager.foxes.Count;
     
     //World
     private int foodQuantity;
