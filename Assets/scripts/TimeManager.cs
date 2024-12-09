@@ -27,12 +27,15 @@ public class TimeManager : MonoBehaviour
     private float minute = 0;
     private int hour = 0; // uniquement utilisées pour le display
 
+    public float gameMinToRealSec;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+        gameMinToRealSec = dayDuration * 60 / 1440;
     }
 
     void Start()
