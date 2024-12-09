@@ -8,12 +8,11 @@ public class prosperityGauje : MonoBehaviour
 {
 
     [SerializeField] private Slider prosperityGauge;
-    [SerializeField] private GameObject timeControl;
     public float prosperity;
     [SerializeField] private TimeManager timeManager;
     void Start()
     {
-        timeManager = timeControl.GetComponent<TimeManager>();
+        timeManager = timeManager.GetComponent<TimeManager>();
     }
 
     // Update is called once per frame
