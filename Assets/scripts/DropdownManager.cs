@@ -47,7 +47,7 @@ public class DropdownManager : MonoBehaviour
 
     void Update()
     {
-
+        //UpdateDropdown(listFox); surement une mauvaise idée voir plus haut 
     }
 
     void UpdateDropdown(List<GameObject> listFox)
