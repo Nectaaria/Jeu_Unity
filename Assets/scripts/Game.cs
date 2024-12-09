@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 public class Game : MonoBehaviour
 {
+    public static Game gameInstance { get; private set; }
     [SerializeField] GaugeManager gaugeManager;
     [SerializeField] PopulationManager populationManager;
+    [SerializeField] Canvas endGameCanvas;
+    [SerializeField] Canvas uiCanvas;
+
+    [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject loosePanel;
+
     //Foxes
     public int nbFoxes;
     private List<int> foxesToDie;
     
     //World
-    private int foodQuantity;
-    private int woodQuantity;
-    private int stoneQuantity;
+    public Dictionary<string, int> inventory = new Dictionary<string, int>();
     
     //End
     private string endGame;
@@ -21,11 +29,21 @@ public class Game : MonoBehaviour
     //Eating
     private bool hasEaten;
     private int nbFoxesNotEating;
-    
-    
+
+    private void Awake()
+    {
+        if (gameInstance == null)
+        {
+            gameInstance = this;
+        }
+    }
+
+
     void Start()
     {
-        
+        inventory.Add("wood", 0);
+        inventory.Add("stone", 0);
+        inventory.Add("food", 0);
     }
     
     
@@ -38,20 +56,12 @@ public class Game : MonoBehaviour
         CheckEndGame();
         if (!CheckEndGame())//if the game isn't over
         {
-            
             Eating();
             KillFox();
         }
         else
         {
-            if(endGame == "Win")
-            {
-                //Display win panel
-            }
-            if(endGame == "Loose")
-            {
-                //Display loose panel
-            }
+            EndGame(endGame);
         }
     }
 
@@ -86,18 +96,18 @@ public class Game : MonoBehaviour
     void Eating()
     {
         //if there's enough food for all the foxes
-        if (nbFoxes <= foodQuantity)
+        if (nbFoxes <= inventory["food"])
         {
             hasEaten = true;
-            foodQuantity -= nbFoxes;
+            inventory["food"] -= nbFoxes;
         }
         //if there's not enough food for all the foxes
-        if(nbFoxes != foodQuantity )
+        if(nbFoxes != inventory["food"])
         {
             hasEaten = false ;
             nbFoxesNotEating = 0; //resetting the value of foxes that haven't eaten
-            nbFoxesNotEating = nbFoxes - foodQuantity; //storing a value of foxes that haven't eaten
-            foodQuantity = nbFoxes - nbFoxesNotEating; //updating the food quantity
+            nbFoxesNotEating = nbFoxes - inventory["food"]; //storing a value of foxes that haven't eaten
+            inventory["food"] = nbFoxes - nbFoxesNotEating; //updating the food quantity
         }
         
     }
@@ -118,5 +128,20 @@ public class Game : MonoBehaviour
         }
 
         return false;
+    }
+
+    void EndGame(string endGame)
+    {
+        endGameCanvas.enabled = true;
+        uiCanvas.enabled = false;
+
+        if (endGame == "Win")
+        {
+            winPanel.SetActive(true);
+        }
+        else if (endGame == "Loose")
+        {
+            loosePanel.SetActive(true);
+        }
     }
 }
