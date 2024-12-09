@@ -31,6 +31,7 @@ public class GaugeManager : MonoBehaviour
     void Update()
     {
         IncreaseProsperity();
+        DecreaseProsperity();
     }
     
     //if there's a museum or a library, the prosperity increases
@@ -53,12 +54,15 @@ public class GaugeManager : MonoBehaviour
 
     public void DecreaseProsperity()
     {
-        if (isSad)
+        foreach (var fox in PopulationManager.instance.foxes)
         {
-            currentProsperity -= 10;
-            prosperityGauge.value = currentProsperity;
-            
+            if (fox.GetComponent<Fox>().isSad)
+            {
+                currentProsperity -= 1;
+                prosperityGauge.value = currentProsperity;
+            }
         }
+        
     }
     
 }
