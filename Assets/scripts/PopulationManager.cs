@@ -5,12 +5,22 @@ using UnityEngine.AI;
 
 public class PopulationManager : MonoBehaviour
 {
+    public static PopulationManager instance;
+
     private float lastBornDay = 0;
     [SerializeField] float bornDelay = 3;
     [SerializeField] GameObject populationPrefab;
     [SerializeField] List<Transform> spawnPoints;
 
     public List<GameObject> foxes;
+
+    PopulationManager()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     private void Update()
     {
