@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance { get; private set; }
 
-    [SerializeField, Tooltip("Durée de la journée en minutes")]
+    [SerializeField, Tooltip("Durï¿½e de la journï¿½e en minutes")]
     private float dayDuration = 4f;
 
     [SerializeField] private Toggle toggleSpeed_Pause;
@@ -25,7 +25,7 @@ public class TimeManager : MonoBehaviour
     private float timeElapsed;
 
     private float minute = 0;
-    private int hour = 0; // uniquement utilisées pour le display
+    private int hour = 0; // uniquement utilisï¿½es pour le display
 
     public float gameMinToRealSec;
 
@@ -82,8 +82,6 @@ public class TimeManager : MonoBehaviour
         timeElapsed += Time.deltaTime * 1440 / (dayDuration * 60);
         timeArray[2] = (int)timeElapsed;
         minute += Time.deltaTime * 1440 / (dayDuration * 60);
-        Debug.Log("minutes = " + timeArray[2]);
-        Debug.Log("heures = " + timeArray[1]);
 
         if (minute < 9.5f)
         {
