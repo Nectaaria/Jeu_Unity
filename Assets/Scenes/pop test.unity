@@ -1650,6 +1650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountPerSec: 1
+  amountBonus: 0
   type: wood
 --- !u!1 &600095993
 GameObject:
@@ -3869,6 +3870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountPerSec: 1
+  amountBonus: 0
   type: food
 --- !u!1 &1746792990
 GameObject:
@@ -3915,6 +3917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountPerSec: 1
+  amountBonus: 0
   type: stone
 --- !u!1 &1779069183
 GameObject:

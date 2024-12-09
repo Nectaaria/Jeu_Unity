@@ -81,6 +81,10 @@ public class Fox : MonoBehaviour
             {
                 target.GetComponent<IWorkable>().Work(this);
             }
+            else if(target.tag == "House")
+            {
+                StartCoroutine(target.GetComponent<House>().Sleep(sleepDuration));
+            }
             if (coroutine != null)
                 return;
             coroutine =  StartCoroutine( stateAterTime(duration, nextState));
