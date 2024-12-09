@@ -19,6 +19,8 @@ public class Game : MonoBehaviour
     //Eating
     private string hasEaten;
     private int nbFoxesNotEating;
+    
+    
     void Start()
     {
     }
@@ -59,7 +61,10 @@ public class Game : MonoBehaviour
             nbFoxes -= nbFoxes;
         }
         //if the fox is too old, it dies
-        
+        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Eating()
