@@ -29,11 +29,12 @@ public class TimeManager : MonoBehaviour
 
     public float gameMinToRealSec;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void InitializeTimer()
+    public TimeManager()
     {
-        Debug.Log("TimeManager initialisé");
-        TimeManager Instance = instance;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     private void Awake()

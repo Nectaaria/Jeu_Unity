@@ -1614,9 +1614,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 597515602}
+  - component: {fileID: 597515603}
   m_Layer: 0
   m_Name: Forest
-  m_TagString: Untagged
+  m_TagString: Workplace
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1636,6 +1637,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 860188885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597515603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597515601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55be678521462ef419f14dbbe71e1dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountPerSec: 1
+  type: wood
 --- !u!1 &600095993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,9 +2649,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1002850855}
+  - component: {fileID: 1002850856}
   m_Layer: 0
   m_Name: School
-  m_TagString: Untagged
+  m_TagString: Workplace
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2656,6 +2672,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 860188885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1002850856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002850854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46088d1b706d01d4ea3278363ace217b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expAmount: 1
 --- !u!4 &1012423987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 562366162545611132, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
@@ -2692,6 +2721,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gaugeManager: {fileID: 902421274}
   populationManager: {fileID: 923209410}
+  endGameCanvas: {fileID: 0}
+  uiCanvas: {fileID: 0}
+  winPanel: {fileID: 0}
+  loosePanel: {fileID: 0}
   nbFoxes: 0
 --- !u!4 &1109520971
 Transform:
@@ -3800,9 +3833,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700083709}
+  - component: {fileID: 1700083710}
   m_Layer: 0
   m_Name: Bush
-  m_TagString: Untagged
+  m_TagString: Workplace
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3822,6 +3856,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 860188885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700083710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700083708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55be678521462ef419f14dbbe71e1dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountPerSec: 1
+  type: food
 --- !u!1 &1746792990
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,9 +3879,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1746792991}
+  - component: {fileID: 1746792992}
   m_Layer: 0
   m_Name: Mine
-  m_TagString: Untagged
+  m_TagString: Workplace
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3853,6 +3902,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 860188885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1746792992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746792990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55be678521462ef419f14dbbe71e1dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountPerSec: 1
+  type: stone
 --- !u!1 &1779069183
 GameObject:
   m_ObjectHideFlags: 0
