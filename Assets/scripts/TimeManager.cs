@@ -29,20 +29,23 @@ public class TimeManager : MonoBehaviour
 
     public float gameMinToRealSec;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void InitializeTimer()
+    {
+        Debug.Log("TimeManager initialis�");
+        TimeManager Instance = instance;
+    }
+
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        Debug.Log("Awake appel�");
         gameMinToRealSec = dayDuration * 60 / 1440;
     }
 
     void Start()
     {
         timeArray[0] = 1;
-        timeArray[1] = hour
-            ;
+        timeArray[1] = hour;
         timeArray[2] = (int)minute;
 
         dayCounterDisplay.text = "Day : " + timeArray[0].ToString();
