@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas pauseMenu;
 
     [SerializeField] private GameObject gameManager;
+    [SerializeField] private GameObject popManager;
 
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject optionPanel;
@@ -60,10 +61,9 @@ public class UIManager : MonoBehaviour
 
         Game gameScript = gameManager.GetComponent<Game>();
         inventory = gameScript.inventory;
-        //listFox = gameScript
-
+        PopulationManager pop = popManager.GetComponent<PopulationManager>();
+        listFox = pop.foxes;
     }
-
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
