@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas uiCanvas;
     [SerializeField] private Canvas pauseMenu;
 
+    [SerializeField] private GameObject gameManager;
+
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private GameObject mainMenuPanel;
@@ -26,6 +28,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button optionMenuBackButton;
 
     [SerializeField] private Button changeJobButton;
+
+    private List<GameObject> listFox;
+    private Dictionary<string, int> inventory;
+
+    [SerializeField] private TextMeshProUGUI foxNb;
+    [SerializeField] private TextMeshProUGUI foodNb;
+    [SerializeField] private TextMeshProUGUI stoneNb;
+    [SerializeField] private TextMeshProUGUI woodNb;
 
     /*[SerializeField] private Button learnFarmerButton;
     [SerializeField] private Button learnLumberjackButton;
@@ -47,6 +57,11 @@ public class UIManager : MonoBehaviour
         optionButton.onClick.AddListener(OptionMenu);
         optionMenuBackButton.onClick.AddListener(OptionMenu);
         replayButton.onClick.AddListener(Replay);
+
+        Game gameScript = gameManager.GetComponent<Game>();
+        inventory = gameScript.inventory;
+        //listFox = gameScript
+
     }
 
     void Update()
@@ -55,6 +70,11 @@ public class UIManager : MonoBehaviour
         {
             PauseGame(isGamePaused);
         }
+        foodNb.SetText(inventory["food"].ToString());
+        stoneNb.SetText(inventory["stone"].ToString());
+        woodNb.SetText(inventory["wood"].ToString());
+        foxNb.SetText(listFox.Count.ToString());
+
     }
 
     private void PauseGame(bool isPaused)
