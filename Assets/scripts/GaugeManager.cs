@@ -6,16 +6,18 @@ using UnityEngine.UI;
 public class GaugeManager : MonoBehaviour
 {
     //Prosperity 
-    public Slider prosperityGauge;//Slider for the prosperity gauge
+    [SerializeField] private Slider prosperityGauge;//Slider for the prosperity gauge
 
     public float minProsperity = 0f;
     public float maxProsperity = 100f;
 
     public float currentProsperity;
+    //Buildings
     public bool hasMuseum = false;
     public bool hasLibrary = false;
 
-    // Start is called before the first frame update
+    //Foxes
+    private bool isSad = false;
     public void Start()
     {
         currentProsperity = minProsperity;
@@ -47,6 +49,16 @@ public class GaugeManager : MonoBehaviour
             hasMuseum = false;
         }
         
+    }
+
+    public void DecreaseProsperity()
+    {
+        if (isSad)
+        {
+            currentProsperity -= 10;
+            prosperityGauge.value = currentProsperity;
+            
+        }
     }
     
 }
