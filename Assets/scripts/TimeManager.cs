@@ -29,20 +29,23 @@ public class TimeManager : MonoBehaviour
 
     public float gameMinToRealSec;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void InitializeTimer()
+    {
+        Debug.Log("TimeManager initialisé");
+        TimeManager Instance = instance;
+    }
+
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        Debug.Log("Awake appelé");
         gameMinToRealSec = dayDuration * 60 / 1440;
     }
 
     void Start()
     {
         timeArray[0] = 1;
-        timeArray[1] = hour
-            ;
+        timeArray[1] = hour;
         timeArray[2] = (int)minute;
 
         dayCounterDisplay.text = "Day : " + timeArray[0].ToString();
@@ -71,7 +74,7 @@ public class TimeManager : MonoBehaviour
         {
             if (toggleSpeed_x3.isOn)
             {
-                Time.timeScale = 10;
+                Time.timeScale = 3;
             }
         });
     }
@@ -82,8 +85,8 @@ public class TimeManager : MonoBehaviour
         timeElapsed += Time.deltaTime * 1440 / (dayDuration * 60);
         timeArray[2] = (int)timeElapsed;
         minute += Time.deltaTime * 1440 / (dayDuration * 60);
-        Debug.Log("minutes = " + timeArray[2]);
-        Debug.Log("heures = " + timeArray[1]);
+        //Debug.Log("minutes = " + timeArray[2]);
+        //Debug.Log("heures = " + timeArray[1]);
 
         if (minute < 9.5f)
         {
