@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Fox : MonoBehaviour
 {
-    [SerializeField] int daysToLive;
-    private float bornDay;
+    public int daysToLive;
+    public float bornDay;
     public enum Task { wandering, working, sleeping };
     public Task state = Task.wandering;
     [SerializeField] float wanderRange = 5f;

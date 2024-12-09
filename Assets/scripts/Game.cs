@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] GaugeManager gaugeManager;
     [SerializeField] PopulationManager populationManager;
     //Foxes
-    [SerializeField] private int nbFoxes = populationManager.foxes.Count;
+    [SerializeField] private int nbFoxes;
     
     //World
     private int foodQuantity;
@@ -24,11 +24,16 @@ public class Game : MonoBehaviour
     
     void Start()
     {
+        
     }
+    
+    
+    
 
     // Update is called once per frame
     void Update()
     {
+        nbFoxes = PopulationManager.instance.foxes.Count;
         CheckEndGame();
         if (!CheckEndGame())//if the game isn't over
         {
@@ -62,9 +67,14 @@ public class Game : MonoBehaviour
             nbFoxes -= nbFoxes;
         }
         //if the fox is too old, it dies
-        if (TimeManager.instance.timeArray[0] > bornDay + daysToLive)
+        for (int i = nbFoxes; i <= 0; i--)
         {
-            Destroy(gameObject);
+            var currentFox = PopulationManager.instance.foxes[i].GetComponent<Fox>();
+            if (TimeManager.instance.timeArray[0] > currentFox.bornDay + currentFox.daysToLive)
+            {
+                Destroy(gameObject);
+                PopulationManager.instance.foxes.RemoveAt(i);
+            }
         }
     }
 
