@@ -19,7 +19,7 @@ public class Game : MonoBehaviour
     private string endGame;
     
     //Eating
-    private string hasEaten;
+    private bool hasEaten;
     private int nbFoxesNotEating;
     
     
@@ -58,15 +58,18 @@ public class Game : MonoBehaviour
     void KillFox()
     {
         //if the fox hasn't eaten today, it dies
-        /*if (hasEaten == "Partially")
+        if (!hasEaten)
         {
-            nbFoxes -= nbFoxesNotEating;
-            //choose randomly which foxes die
+            for (int i = nbFoxesNotEating - 1; i >= 0; i--)
+            {
+                Debug.Log("i "+i);
+                int random = Random.Range(0, nbFoxes);
+                var currentFox = PopulationManager.instance.foxes[random].GetComponent<Fox>();
+                PopulationManager.instance.foxes.RemoveAt(random);
+                Destroy(currentFox.gameObject); 
+            }
         }
-        if (hasEaten == "No")
-        {
-            nbFoxes -= nbFoxes;
-        }*/
+        
         //if the fox is too old, it dies
         for (int i = nbFoxes - 1; i >= 0; i--)
         {
@@ -76,7 +79,6 @@ public class Game : MonoBehaviour
             {
                 PopulationManager.instance.foxes.RemoveAt(i);
                 Destroy(currentFox.gameObject); 
-                //foxesToDie.Add(i);
             }
         }
     }
@@ -84,24 +86,20 @@ public class Game : MonoBehaviour
     void Eating()
     {
         //if there's enough food for all the foxes
-        if (nbFoxes == foodQuantity)
+        if (nbFoxes <= foodQuantity)
         {
-            hasEaten = "Yes";
+            hasEaten = true;
             foodQuantity -= nbFoxes;
         }
         //if there's not enough food for all the foxes
-        if(nbFoxes != foodQuantity || foodQuantity > 0)
+        if(nbFoxes != foodQuantity )
         {
-            hasEaten = "Partially";
+            hasEaten = false ;
             nbFoxesNotEating = 0; //resetting the value of foxes that haven't eaten
             nbFoxesNotEating = nbFoxes - foodQuantity; //storing a value of foxes that haven't eaten
             foodQuantity = nbFoxes - nbFoxesNotEating; //updating the food quantity
         }
-        //if there's no food
-        if (foodQuantity == 0)
-        {
-            hasEaten = "No";
-        }
+        
     }
 
     bool CheckEndGame()
