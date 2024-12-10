@@ -15,6 +15,12 @@ public class BuildingManager : MonoBehaviour
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
 
+    [SerializeField] private int woodRequired;
+    [SerializeField] private int stoneRequired;
+    [SerializeField] private GameObject gameManager;
+    private Dictionary<string, int> inventory;
+
+
     public MeshRenderer[] meshComponents;
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
 
@@ -30,6 +36,11 @@ public class BuildingManager : MonoBehaviour
         nObstacles = 0;
 
         InitializeMaterials();
+    }
+    private void Start()
+    {
+        Game gameScript = gameManager.GetComponent<Game>();
+        inventory = gameScript.inventory;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,12 +75,14 @@ public class BuildingManager : MonoBehaviour
 
     public void SetPlacementMode(PlacementMode mode)
     {
+        Game gameScript = gameManager.GetComponent<Game>();
+        inventory = gameScript.inventory;
         if (mode == PlacementMode.Fixed)
         {
             isFixed = true;
             hasValidPlacement = true;
         }
-        else if (mode == PlacementMode.Valid)
+        else if (mode == PlacementMode.Valid && inventory["wood"] >= woodRequired && inventory["stone"] >= stoneRequired)
         {
             hasValidPlacement = true;
         }

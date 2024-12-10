@@ -121,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validPlacementMaterial: {fileID: 2100000, guid: 9e97a4639ae296f419b263fc01c704cb, type: 2}
   invalidPlacementMaterial: {fileID: 2100000, guid: 7606f3e1c5e7d87499a2934d5390a0e7, type: 2}
+  woodRequired: 100
+  stoneRequired: 50
+  gameManager: {fileID: 0}
   meshComponents:
   - {fileID: 4287358069327795079}
   hasValidPlacement: 0
