@@ -15,7 +15,8 @@ public class Fox : MonoBehaviour
 
     public GameObject workplace;
     public float schoolProgression = 0;
-    public GameObject learningWorkplace;
+    public string job;
+    public string nextJob;
 
     [SerializeField] float workDuration = 480;
     [SerializeField] float sleepDuration = 600;
@@ -41,10 +42,49 @@ public class Fox : MonoBehaviour
             isSad = true;
         }
 
-        //if he doesn't have a job
-        if (workplace == null)
+        switch(job)
         {
-            state = Task.wandering;
+            case "builder":
+                if (workplace == null)
+                {
+                    /*
+                    foreach(buildingSite in buildManager.instance.buildingSites)
+                    {
+                        if (buildingSite.worker == null)
+                        {
+                            buildingSite.worker == gameObject;
+                            workplace = buildingSite;
+                            return;
+                        }
+                    }
+                    if(workplace == null)
+                    {
+                        state = Task.Wandering
+                    }
+                    */
+                }
+                break;
+
+            case "farmer":
+                workplace = GameObject.Find("Bush");
+                break;
+
+            case "lumberjack":
+                workplace = GameObject.Find("Forest");
+                break;
+
+            case "miner":
+                workplace = GameObject.Find("Mine");
+                break;
+
+            case "student":
+                workplace = GameObject.Find("School");
+                break;
+
+            case "wanderer":
+                workplace = null;
+                state = Task.wandering;
+                break;
         }
 
         switch (state)
@@ -85,6 +125,10 @@ public class Fox : MonoBehaviour
             {
                 StartCoroutine(target.GetComponent<House>().Sleep(sleepDuration));
             }
+            else if(job == "builder")
+            {
+                //truc a lucas
+            }
             if (coroutine != null)
                 return;
             coroutine =  StartCoroutine( stateAterTime(duration, nextState));
@@ -112,5 +156,31 @@ public class Fox : MonoBehaviour
         if (state == Task.sleeping)
             sadTimeOrigin = TimeManager.instance.timeArray[2];
         this.state = state;
+    }
+
+    public void ChangeJob(string job)
+    {
+        switch(job)
+        {
+            case "mason":
+                this.job = "student";
+                nextJob = job;
+                break;
+
+            case "miner":
+                this.job = "student";
+                nextJob = job;
+                break;
+
+            case "lumberjack":
+                this.job = "student";
+                nextJob = job;
+                break;
+
+            case "farmer":
+                this.job = "student";
+                nextJob = job;
+                break;
+        }
     }
 }

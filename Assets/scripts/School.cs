@@ -12,8 +12,8 @@ public class School : MonoBehaviour, IWorkable
         if(fox.schoolProgression >= 100)
         {
             fox.schoolProgression = 0;
-            fox.workplace = fox.learningWorkplace;
-            fox.learningWorkplace = null;
+            fox.job = fox.nextJob;
+            fox.nextJob = null;
         }
     }
 }
