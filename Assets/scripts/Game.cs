@@ -10,9 +10,9 @@ public class Game : MonoBehaviour
     public static Game gameInstance { get; private set; }
     [SerializeField] GaugeManager gaugeManager;
     [SerializeField] PopulationManager populationManager;
+    //UI
     [SerializeField] Canvas endGameCanvas;
     [SerializeField] Canvas uiCanvas;
-
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject loosePanel;
 
@@ -54,8 +54,21 @@ public class Game : MonoBehaviour
         CheckEndGame();
         if (!CheckEndGame())//if the game isn't over
         {
-            Eating();
-            KillFox();
+            if (TimeManager.instance.timeArray[1] == 9)
+            {
+                for (int i = 0 ; i < nbFoxes; i++)
+                {
+                    var firsCurrentFox = PopulationManager.instance.foxes[i].GetComponent<Fox>();
+                    firsCurrentFox.state = Fox.Task.working;
+                }
+            }
+
+            if (TimeManager.instance.timeArray[1] == 18)
+            {
+                Eating();
+                KillFox();
+            }
+            
         }
         else
         {
