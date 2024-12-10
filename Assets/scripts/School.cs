@@ -6,6 +6,7 @@ public class School : MonoBehaviour, IWorkable
 {
     [SerializeField] float expAmount = 1f;
 
+    //work at school by progressing a gauge. When gauge is filled, change job
     void IWorkable.Work(Fox fox)
     {
         fox.schoolProgression += expAmount;

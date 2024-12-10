@@ -36,17 +36,19 @@ public class Fox : MonoBehaviour
 
     private void Update()
     {
-        //depression
+        //depression if tired fot too long
         if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
         {
             isSad = true;
         }
 
+        //choose a workplace based on the job
         switch(job)
         {
             case "builder":
                 if (workplace == null)
                 {
+                    //if he is not building something, search for something to build and if there's nothing, wander
                     /*
                     foreach(buildingSite in buildManager.instance.buildingSites)
                     {
@@ -158,6 +160,7 @@ public class Fox : MonoBehaviour
         this.state = state;
     }
 
+    //change the job throught UI
     public void ChangeJob(string job)
     {
         switch(job)
