@@ -123,13 +123,12 @@ public class Fox : MonoBehaviour
             {
                 target.GetComponent<IWorkable>().Work(this);
             }
+
+            //j'aurais dû implémenter l'interface IWorkable dans house aussi (mon système avec les tag n'est pas pratique à manipuler et il y a déja une interface pour workplace et school)
+            //j'aurais dû appeler l'interface IInteractable
             else if(target.tag == "House")
             {
                 StartCoroutine(target.GetComponent<House>().Sleep(sleepDuration));
-            }
-            else if(job == "builder")
-            {
-                //truc a lucas
             }
             if (coroutine != null)
                 return;
