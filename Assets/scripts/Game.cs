@@ -16,6 +16,9 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject loosePanel;
 
+    [SerializeField] private DropdownManager dropdownManager;
+
+
     //Foxes
     public int nbFoxes;
     private List<int> foxesToDie;
@@ -44,6 +47,7 @@ public class Game : MonoBehaviour
         inventory.Add("wood", 0);
         inventory.Add("stone", 0);
         inventory.Add("food", 0);
+        dropdownManager = GetComponent<DropdownManager>();
     }
 
     // Update is called once per frame
@@ -101,6 +105,7 @@ public class Game : MonoBehaviour
                 Destroy(currentFox.gameObject);
             }
         }
+        dropdownManager.UpdateDropdown();
     }
 
     void Eating()

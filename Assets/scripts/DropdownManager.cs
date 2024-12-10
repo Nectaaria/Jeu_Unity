@@ -40,17 +40,17 @@ public class DropdownManager : MonoBehaviour
         PopulationManager pop = popManager.GetComponent<PopulationManager>();
         listFox = pop.foxes;
 
-        UpdateDropdown(listFox);//APPELER CES METHODES A CHAQUE MAJ DE LA POPULATION
+        UpdateDropdown();//APPELER CES METHODES A CHAQUE MAJ DE LA POPULATION
 
 
     }
 
     void Update()
     {
-        //UpdateDropdown(listFox); surement une mauvaise idée voir plus haut 
+        
     }
 
-    void UpdateDropdown(List<GameObject> listFox)
+    public void UpdateDropdown()
     {
         dropdown.options.Clear();
         List<string> foxNames = new List<string>();//AJOUTER UN ATTRIBUT NAME AUX RENARDS
