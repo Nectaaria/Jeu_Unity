@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class BuildingPlacer : MonoBehaviour
 {
-    public static BuildingPlacer instance; // (Singleton pattern)
+    public static BuildingPlacer instance{ get; private set; }
+    
 
     public LayerMask groundLayerMask;
+    public List<GameObject> building;
 
     protected GameObject buildingPrefab;
     protected GameObject toBuild;
@@ -22,11 +25,15 @@ public class BuildingPlacer : MonoBehaviour
         instance = this; // (Singleton pattern)
         mainCamera = Camera.main;
         buildingPrefab = null;
+        building = new List<GameObject>();
     }
 
-    private void OnMousePosition(InputValue value)
+    private void BuildingPlacerInstance()
     {
-
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
     private void Update()
     {
@@ -67,6 +74,7 @@ public class BuildingPlacer : MonoBehaviour
                     BuildingManager m = toBuild.GetComponent<BuildingManager>();
                     if (m.hasValidPlacement)
                     {
+                        building.Add(toBuild);
                         m.SetPlacementMode(PlacementMode.Fixed);
 
                         // shift-key: chain builds
