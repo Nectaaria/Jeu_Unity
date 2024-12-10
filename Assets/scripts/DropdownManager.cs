@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,25 +9,24 @@ public class DropdownManager : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown dropdown;
 
-    //private List<GameObject> population;
-
-    [SerializeField] private GameObject mine;
-    [SerializeField] private GameObject forest;
-    [SerializeField] private GameObject bush;
-    [SerializeField] private GameObject plain;
-
     [SerializeField] private GameObject infoPanel;
     [SerializeField] private GameObject ChangeJobButton;
-    [SerializeField] private GameObject popManager;
 
     [SerializeField] private Button closeInfo;
 
-    [SerializeField] private TMP_Text foxNameText;
     [SerializeField] private TMP_Text foxJobText;
+    [SerializeField] private GameObject changeJobButtonsLayout;
 
-    [SerializeField] private Fox fox;
+    [SerializeField] private Button learnMason;
+    [SerializeField] private Button learnFarmer;
+    [SerializeField] private Button learnLumberjack;
+    [SerializeField] private Button learnMiner;
+    private GameObject selectedFox;
+
+    private Fox fox;
 
     [SerializeField] List<GameObject> listFox = new List<GameObject>();
+
     private PopulationManager pop;
 
 
@@ -34,6 +34,11 @@ public class DropdownManager : MonoBehaviour
     {
         closeInfo.onClick.AddListener(CloseInfoPanel);
         dropdown.onValueChanged.AddListener(OnFoxSelected);
+
+        learnLumberjack.onClick.AddListener(() => ChangeJob("lumberjack"));
+        learnMason.onClick.AddListener(() => ChangeJob("mason"));
+        learnFarmer.onClick.AddListener(() => ChangeJob("farmer"));
+        learnMiner.onClick.AddListener(() => ChangeJob("miner"));
 
         UpdateDropdown();
     }
@@ -58,9 +63,8 @@ public class DropdownManager : MonoBehaviour
     {
         if (index >= 0 && index < listFox.Count)
         {
-            GameObject selectedFox = listFox[index];
-
-            foxNameText.text = selectedFox.name;
+            selectedFox = listFox[index];
+            foxJobText.text = selectedFox.GetComponent<Fox>().job;
 
             infoPanel.SetActive(true);
         }
@@ -72,5 +76,11 @@ public class DropdownManager : MonoBehaviour
     void CloseInfoPanel()
     {
         infoPanel.SetActive(false);
+        changeJobButtonsLayout.SetActive(false);
+    }
+    void ChangeJob(string newJob)
+    {
+        selectedFox.GetComponent<Fox>().job = newJob;
+        foxJobText.text = selectedFox.GetComponent<Fox>().job;
     }
 }

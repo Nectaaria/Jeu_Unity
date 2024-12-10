@@ -38,12 +38,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stoneNb;
     [SerializeField] private TextMeshProUGUI woodNb;
 
-    /*[SerializeField] private Button learnFarmerButton;
-    [SerializeField] private Button learnLumberjackButton;
-    [SerializeField] private Button learnMinerButton;
-    [SerializeField] private Button learnBuilderButton;*/
-    //à faire dans onClick avec le script des batiments
-
     [SerializeField] private Button replayButton;
 
     private float timeScale = 1f;
