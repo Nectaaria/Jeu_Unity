@@ -27,12 +27,12 @@ public class CameraManager : MonoBehaviour
 
         if (isUpMoving)
         {
-            camera.transform.position += new Vector3(0, 0.1f, 0);
+            camera.transform.position += new Vector3(0, 0, 0.1f);
         }
 
         if (isDownMoving)
         {
-            camera.transform.position += new Vector3(0, -0.1f, 0);
+            camera.transform.position += new Vector3(0, 0, -0.1f);
         }
     }
     public void OnPointerExit()

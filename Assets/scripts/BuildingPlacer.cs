@@ -50,12 +50,13 @@ public class BuildingPlacer : MonoBehaviour
             }
 
             // hide preview when hovering UI
-            if (EventSystem.current.IsPointerOverGameObject())
+            /*if (EventSystem.current.IsPointerOverGameObject())
             {
                 if (toBuild.activeSelf) toBuild.SetActive(false);
                 return;
             }
             else if (!toBuild.activeSelf) toBuild.SetActive(true);
+            */
 
             // rotate preview with Spacebar
             if (Input.GetKeyDown(KeyCode.Space))

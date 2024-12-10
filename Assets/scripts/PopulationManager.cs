@@ -38,7 +38,6 @@ public class PopulationManager : MonoBehaviour
             GameObject fox = Instantiate(populationPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].position, Quaternion.identity, transform);
             foxes.Add(fox);
             lastBornDay = TimeManager.instance.timeArray[0];
-            dropdownManager.UpdateDropdown();
         }
     }
 }
