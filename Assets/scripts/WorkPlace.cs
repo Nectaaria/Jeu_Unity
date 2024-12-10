@@ -8,6 +8,8 @@ public class WorkPlace : MonoBehaviour, IWorkable
     public int amountBonus = 0;
     [SerializeField] string type;
     Coroutine coroutine;
+
+    //Add a certain amount of wood/stone/food to the inventory when a fox is working
     void IWorkable.Work(Fox fox)
     {
         if (coroutine != null)

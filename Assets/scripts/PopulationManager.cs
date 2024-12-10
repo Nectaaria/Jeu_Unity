@@ -32,6 +32,7 @@ public class PopulationManager : MonoBehaviour
 
     private void Update()
     {
+        //Instantiate a fox each X delay and add the fox in a list
         if (TimeManager.instance.timeArray[0] > lastBornDay + bornDelay)
         {
             GameObject fox = Instantiate(populationPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].position, Quaternion.identity, transform);

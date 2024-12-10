@@ -36,17 +36,19 @@ public class Fox : MonoBehaviour
 
     private void Update()
     {
-        //depression
+        //depression if tired fot too long
         if (TimeManager.instance.timeArray[2] > sadTimeOrigin + sadDelay && sadTimeOrigin != -1)
         {
             isSad = true;
         }
 
+        //choose a workplace based on the job
         switch(job)
         {
             case "builder":
                 if (workplace == null)
                 {
+                    //if he is not building something, search for something to build and if there's nothing, wander
                     /*
                     foreach(buildingSite in buildManager.instance.buildingSites)
                     {
@@ -121,13 +123,12 @@ public class Fox : MonoBehaviour
             {
                 target.GetComponent<IWorkable>().Work(this);
             }
+
+            //j'aurais dû implémenter l'interface IWorkable dans house aussi (mon système avec les tag n'est pas pratique à manipuler et il y a déja une interface pour workplace et school)
+            //j'aurais dû appeler l'interface IInteractable
             else if(target.tag == "House")
             {
                 StartCoroutine(target.GetComponent<House>().Sleep(sleepDuration));
-            }
-            else if(job == "builder")
-            {
-                //truc a lucas
             }
             if (coroutine != null)
                 return;
@@ -158,6 +159,7 @@ public class Fox : MonoBehaviour
         this.state = state;
     }
 
+    //change the job throught UI
     public void ChangeJob(string job)
     {
         switch(job)
