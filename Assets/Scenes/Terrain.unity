@@ -656,7 +656,6 @@ GameObject:
   - component: {fileID: 904150313}
   - component: {fileID: 904150312}
   - component: {fileID: 904150311}
-  - component: {fileID: 904150310}
   - component: {fileID: 904150309}
   m_Layer: 3
   m_Name: Terrain
@@ -696,37 +695,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: f40188f172ed5e347ba96f19b7af370e, type: 2}
   m_BuildHeightMesh: 0
---- !u!114 &904150310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904150308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 66af454af269bf74c88cecfb8ffd9eb5, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!154 &904150311
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -756,7 +724,7 @@ Terrain:
   m_GameObject: {fileID: 904150308}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: e5588fa36a7caf141bdf52d1625cdcca, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 2963bde419e901143b811ac4d7cd290a, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -1345,6 +1313,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  building: []
 --- !u!4 &1365020089
 Transform:
   m_ObjectHideFlags: 0
@@ -1395,6 +1364,7 @@ MonoBehaviour:
   uiCanvas: {fileID: 0}
   winPanel: {fileID: 0}
   loosePanel: {fileID: 0}
+  dropdownManager: {fileID: 0}
   nbFoxes: 0
 --- !u!4 &1461952208
 Transform:
