@@ -144,9 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daysToLive: 0
-  state: 1
+  bornDay: 0
+  state: 0
   wanderRange: 10
   workplace: {fileID: 0}
+  schoolProgression: 0
+  job: wanderer
+  nextJob: 
   workDuration: 100
   sleepDuration: 600
   sadDelay: 180

@@ -381,6 +381,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
+      propertyPath: job
+      value: miner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: workplace
       value: 
       objectReference: {fileID: 1746792990}
@@ -799,6 +803,10 @@ PrefabInstance:
     - target: {fileID: 562366162545611132, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
+      propertyPath: job
+      value: builder
       objectReference: {fileID: 0}
     - target: {fileID: 7574488954261353377, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: m_Name
@@ -2897,6 +2905,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
+      propertyPath: job
+      value: lumberjack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: workplace
       value: 
       objectReference: {fileID: 597515601}
@@ -4299,8 +4311,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
+      propertyPath: job
+      value: farmer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: state
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073785838042716426, guid: 969a1777e2c5f9740b1b2017e792ef62, type: 3}
       propertyPath: workplace
