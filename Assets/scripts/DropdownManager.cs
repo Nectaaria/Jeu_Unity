@@ -8,7 +8,7 @@ public class DropdownManager : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown dropdown;
 
-    private List<GameObject> population;
+    //private List<GameObject> population;
 
     [SerializeField] private GameObject mine;
     [SerializeField] private GameObject forest;
@@ -24,25 +24,18 @@ public class DropdownManager : MonoBehaviour
     [SerializeField] private TMP_Text foxNameText;
     [SerializeField] private TMP_Text foxJobText;
 
-    private List<GameObject> farmers = new List<GameObject>();
-    private List<GameObject> builders = new List<GameObject>();
-    private List<GameObject> miners = new List<GameObject>();
-    private List<GameObject> lumberjacks = new List<GameObject>();
-    private List<GameObject> wanderers = new List<GameObject>();
+    [SerializeField] private Fox fox;
 
     [SerializeField] List<GameObject> listFox = new List<GameObject>();
+    private PopulationManager pop;
 
 
     void Start()
     {
         closeInfo.onClick.AddListener(CloseInfoPanel);
         dropdown.onValueChanged.AddListener(OnFoxSelected);
-        PopulationManager pop = popManager.GetComponent<PopulationManager>();
-        listFox = pop.foxes;
 
-        UpdateDropdown();//APPELER CES METHODES A CHAQUE MAJ DE LA POPULATION
-
-
+        UpdateDropdown();
     }
 
     void Update()
@@ -53,10 +46,11 @@ public class DropdownManager : MonoBehaviour
     public void UpdateDropdown()
     {
         dropdown.options.Clear();
-        List<string> foxNames = new List<string>();//AJOUTER UN ATTRIBUT NAME AUX RENARDS
+        listFox.Clear();
+        listFox = PopulationManager.instance.foxes;
         foreach (GameObject fox in listFox)
         {
-            dropdown.options.Add(new TMP_Dropdown.OptionData(fox.name));
+            dropdown.options.Add(new TMP_Dropdown.OptionData(fox.GetComponent<Fox>().job));
         }
     }
 
@@ -67,8 +61,6 @@ public class DropdownManager : MonoBehaviour
             GameObject selectedFox = listFox[index];
 
             foxNameText.text = selectedFox.name;
-
-            // Afficher le panel
 
             infoPanel.SetActive(true);
         }
