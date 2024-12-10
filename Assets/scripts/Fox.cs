@@ -12,7 +12,10 @@ public class Fox : MonoBehaviour
     [SerializeField] float wanderRange = 5f;
 
     private NavMeshAgent agent;
-    [SerializeField] GameObject workplace;
+
+    public GameObject workplace;
+    public float schoolProgression = 0;
+    public GameObject learningWorkplace;
 
     [SerializeField] float workDuration = 480;
     [SerializeField] float sleepDuration = 600;
@@ -74,8 +77,14 @@ public class Fox : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, target.transform.position) < 1)
         {
-            /*if (target.tag == "workplace")
-                workplace.GetComponent<script>().Harvest();*/
+            if(target.tag == "Workplace")
+            {
+                target.GetComponent<IWorkable>().Work(this);
+            }
+            else if(target.tag == "House")
+            {
+                StartCoroutine(target.GetComponent<House>().Sleep(sleepDuration));
+            }
             if (coroutine != null)
                 return;
             coroutine =  StartCoroutine( stateAterTime(duration, nextState));
